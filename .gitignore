@@ -19,6 +19,8 @@ data.json
 *.sqlite
 *.sqlite3
 tmp/
+# 本项目运行期数据目录（SQLite 数据库与测试网站状态）
+data/
 
 # ---- 依赖与构建产物 ----
 node_modules/

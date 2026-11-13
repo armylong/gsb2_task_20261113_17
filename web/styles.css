@@ -1,0 +1,97 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: -apple-system, "PingFang SC", "Microsoft YaHei",
+    "Helvetica Neue", Arial, sans-serif;
+  background: #f4f6f9; color: #1f2933; font-size: 14px;
+}
+header {
+  background: #1f3a5f; color: #fff; padding: 14px 24px;
+  display: flex; align-items: center; gap: 24px;
+}
+header h1 { font-size: 18px; margin: 0; }
+nav { display: flex; gap: 8px; }
+.nav-btn {
+  background: transparent; color: #cdd9e8; border: 1px solid #4a6285;
+  padding: 6px 16px; border-radius: 6px; cursor: pointer;
+}
+.nav-btn.active { background: #fff; color: #1f3a5f; border-color: #fff; }
+main { max-width: 1180px; margin: 20px auto; padding: 0 16px; }
+.view.hidden, .hidden { display: none !important; }
+.panel {
+  background: #fff; border-radius: 10px; padding: 18px 20px;
+  margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+.panel h2 { margin: 0 0 14px; font-size: 16px; }
+.panel h3 { font-size: 14px; margin: 16px 0 8px; }
+.form-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+input, select {
+  padding: 7px 9px; border: 1px solid #cbd2d9; border-radius: 6px;
+  font-size: 14px; font-weight: 400;
+}
+.fields-block { margin: 14px 0; border-top: 1px solid #e4e7eb; padding-top: 10px; }
+.fields-head { display: flex; justify-content: space-between; align-items: center; }
+.field-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.field-row input { flex: 1; }
+.btn {
+  background: #fff; border: 1px solid #9aa5b1; border-radius: 6px;
+  padding: 7px 14px; cursor: pointer; font-size: 13px;
+}
+.btn:hover { background: #f0f4f8; }
+.btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; margin-top: 12px; }
+.btn.primary:hover { background: #1d4ed8; }
+.btn.small { padding: 3px 10px; font-size: 12px; }
+.btn.danger { color: #b91c1c; border-color: #fca5a5; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td {
+  border: 1px solid #e4e7eb; padding: 7px 9px; text-align: left;
+  vertical-align: top; word-break: break-all;
+}
+.data-table th { background: #f0f4f8; font-size: 13px; }
+.table-wrap { overflow-x: auto; }
+.muted { color: #616e7c; font-size: 13px; }
+.badge {
+  display: inline-block; padding: 2px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+}
+.badge.queued { background: #e4e7eb; color: #52606d; }
+.badge.running { background: #dbeafe; color: #1d4ed8; }
+.badge.paused { background: #fef3c7; color: #92400e; }
+.badge.completed { background: #dcfce7; color: #166534; }
+.badge.failed { background: #fee2e2; color: #991b1b; }
+.pager { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+.scenario-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.scenario-btns button {
+  border: 1px solid #9aa5b1; background: #fff; padding: 7px 14px;
+  border-radius: 6px; cursor: pointer;
+}
+.scenario-btns button.active { background: #1f3a5f; color: #fff; border-color: #1f3a5f; }
+.row-actions { display: flex; gap: 10px; margin-top: 12px; }
+.diff-box { display: flex; gap: 14px; margin: 8px 0 12px; flex-wrap: wrap; }
+.diff-chip { padding: 4px 12px; border-radius: 999px; font-size: 13px; }
+.diff-chip.added { background: #dcfce7; color: #166534; }
+.diff-chip.changed { background: #fef3c7; color: #92400e; }
+.diff-chip.removed { background: #fee2e2; color: #991b1b; }
+.diff-chip.unchanged { background: #e4e7eb; color: #52606d; }
+.modal-mask {
+  position: fixed; inset: 0; background: rgba(15,23,42,.45);
+  display: flex; align-items: center; justify-content: center; z-index: 50;
+}
+.modal {
+  background: #fff; border-radius: 10px; width: min(760px, 92vw);
+  max-height: 84vh; overflow: auto; padding: 18px 20px;
+}
+.modal-head { display: flex; justify-content: space-between; align-items: center; }
+.toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  background: #111827; color: #fff; padding: 10px 20px; border-radius: 8px;
+  z-index: 60; max-width: 80vw;
+}
+code {
+  background: #f0f4f8; padding: 1px 5px; border-radius: 4px;
+  font-size: 12px; word-break: break-all;
+}

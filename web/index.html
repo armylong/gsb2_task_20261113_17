@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>本地网页采集工具</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>本地网页采集工具</h1>
+  <nav>
+    <button data-view="tasks" class="nav-btn active">采集任务</button>
+    <button data-view="testsite" class="nav-btn">测试网站</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ========== 任务列表 ========== -->
+  <section id="view-tasks" class="view">
+    <div class="panel">
+      <h2>新建采集任务</h2>
+      <form id="task-form">
+        <div class="form-grid">
+          <label>任务名称<input name="name" required placeholder="例如：商品列表采集"></label>
+          <label>入口网址<input name="entry_url" required placeholder="http://127.0.0.1:8011/api/items"></label>
+          <label>最多同时请求数<input name="max_concurrency" type="number" min="1" max="10" value="2"></label>
+          <label>同网站访问最小间隔（秒）<input name="min_interval" type="number" min="0" step="0.1" value="0.5"></label>
+          <label>单请求最大重试次数<input name="max_retries" type="number" min="0" max="20" value="3"></label>
+        </div>
+        <div class="fields-block">
+          <div class="fields-head">
+            <h3>结果字段（支持嵌套路径，如 author.name；缺失字段留空）</h3>
+            <button type="button" id="add-field" class="btn small">添加字段</button>
+          </div>
+          <div id="field-rows"></div>
+        </div>
+        <button type="submit" class="btn primary">创建并开始第一轮</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2>任务列表</h2>
+      <table class="data-table">
+        <thead><tr>
+          <th>ID</th><th>名称</th><th>状态</th><th>轮次</th>
+          <th>页数</th><th>记录数</th><th>重试</th><th>操作</th>
+        </tr></thead>
+        <tbody id="task-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 任务详情 ========== -->
+  <section id="view-detail" class="view hidden">
+    <button class="btn" id="back-btn">← 返回任务列表</button>
+    <div class="panel" id="detail-head"></div>
+    <div class="panel">
+      <h2>轮次</h2>
+      <table class="data-table">
+        <thead><tr>
+          <th>轮次</th><th>状态</th><th>页数</th><th>记录数</th>
+          <th>重试</th><th>下一页地址</th><th>错误原因</th><th>操作</th>
+        </tr></thead>
+        <tbody id="round-tbody"></tbody>
+      </table>
+    </div>
+    <div class="panel hidden" id="records-panel">
+      <h2 id="records-title">结果记录</h2>
+      <div id="diff-box"></div>
+      <div class="table-wrap">
+        <table class="data-table" id="records-table"></table>
+      </div>
+      <div class="pager" id="pager"></div>
+    </div>
+    <div class="panel hidden" id="failures-panel">
+      <h2>失败请求</h2>
+      <table class="data-table">
+        <thead><tr><th>请求地址</th><th>状态码</th><th>尝试次数</th><th>原因</th></tr></thead>
+        <tbody id="failures-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== 测试网站 ========== -->
+  <section id="view-testsite" class="view hidden">
+    <div class="panel">
+      <h2>内置测试网站</h2>
+      <p id="testsite-info" class="muted"></p>
+      <div class="row-actions">
+        <button class="btn primary" id="demo-task-btn">一键创建演示采集任务（指向上面的测试网站）</button>
+      </div>
+      <h3>场景切换</h3>
+      <div id="scenario-btns" class="scenario-btns"></div>
+      <p class="muted" id="scenario-desc"></p>
+      <h3>演示数据（可增删改，修改即时生效）</h3>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>id</th><th>title</th><th>price</th><th>author.name</th><th>author.city</th><th>操作</th></tr></thead>
+          <tbody id="testdata-tbody"></tbody>
+        </table>
+      </div>
+      <div class="row-actions">
+        <button class="btn" id="test-add-btn">新增记录</button>
+        <button class="btn" id="test-reset-btn">恢复初始数据</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 记录历史弹窗 -->
+<div id="modal-mask" class="modal-mask hidden">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">记录变化历史</h3>
+      <button class="btn small" id="modal-close">关闭</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="app.js"></script>
+</body>
+</html>
